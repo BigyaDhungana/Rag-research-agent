@@ -16,3 +16,19 @@ class DocumentResponse(BaseModel):
     updated_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class DocumentSearchRequest(BaseModel):
+    query: str
+    top_k: int = 5
+
+
+class DocumentSearchResult(BaseModel):
+    content: str
+    score: float
+    document_id: str
+    page: int | None
+
+
+class DocumentSearchResponse(BaseModel):
+    results: list[DocumentSearchResult]
