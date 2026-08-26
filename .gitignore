@@ -9,3 +9,4 @@ venv/
 .venv
 .vscode
 internal_test.txt
+storage/documents
