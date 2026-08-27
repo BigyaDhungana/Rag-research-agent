@@ -10,7 +10,7 @@ from app.schemas.document import (
 from app.services.document_service import create_document
 from app.services.document_processor import process_document
 from app.services.document_search import search_documents
-from app.services.hybrid_retrieval import hybrid_search
+from app.services.hybrid_retrieval import hybrid_search, retrieve
 
 router = APIRouter(prefix="/documents", tags=["documents"])
 
@@ -53,3 +53,11 @@ def search_hybrid(
     db: Session = Depends(get_db),
 ):
     return hybrid_search(db, request.query, top_k_per_method=request.top_k)
+
+
+@router.post("/search/rerank")
+def search_reranked(
+    request: DocumentSearchRequest,
+    db: Session = Depends(get_db),
+):
+    return retrieve(db, request.query)

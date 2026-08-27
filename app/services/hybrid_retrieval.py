@@ -1,15 +1,16 @@
 from sqlalchemy.orm import Session
 
 from app.rag.query_rewriter import get_query_rewriter
+from app.rag.rrf import reciprocal_rank_fusion
+from app.rag.reranker import get_reranker
 from app.services.document_search import search_documents
 from app.services.keyword_search import keyword_search
 
 
-def hybrid_search(db: Session, query: str, top_k_per_method: int = 20) -> dict:
+def hybrid_search(db: Session, query: str, top_k_per_method: int = 100) -> dict:
     """
-    Rewrite the query, run vector search and keyword search independently, 
-    and merge into 1 deduplicated candidate set.
-    Not fused into a single ranked list yet
+    Rewrite the query, run vector + keyword search independently,
+    merge into ONE deduplicated candidate set.
     """
     rewritten_query = get_query_rewriter().rewrite(query)
 
@@ -46,4 +47,31 @@ def hybrid_search(db: Session, query: str, top_k_per_method: int = 20) -> dict:
         "original_query": query,
         "rewritten_query": rewritten_query,
         "candidates": list(candidates.values()),
+    }
+
+
+def retrieve(
+    db: Session,
+    query: str,
+    candidate_k: int = 100,
+    fused_k: int = 20,
+    final_k: int = 5,
+) -> dict:
+    """
+    full pipeline — 100 (per method) -> hybrid merge -> RRF ->
+    top 20 -> cross-encoder rerank -> top 5.
+    """
+    hybrid = hybrid_search(db, query, top_k_per_method=candidate_k)
+
+    fused = reciprocal_rank_fusion(hybrid["candidates"])
+    top_fused = fused[:fused_k]
+
+    reranked = get_reranker().rerank(
+        hybrid["rewritten_query"], top_fused, top_k=final_k
+    )
+
+    return {
+        "original_query": hybrid["original_query"],
+        "rewritten_query": hybrid["rewritten_query"],
+        "results": reranked,
     }
