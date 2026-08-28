@@ -22,10 +22,14 @@ def search_documents(db: Session, query: str, top_k: int = 5) -> list[dict]:
 
     results = []
     for chunk, distance in rows:
-        results.append({
-            "content": chunk.content,
-            "score": 1 - distance,  # cosine similarity from distance
-            "document_id": str(chunk.document_id),
-            "page": chunk.page_number,
-        })
+        results.append(
+            {
+                "chunk_id": str(chunk.id),
+                "content": chunk.content,
+                "score": 1 - distance,  # cosine similarity from distance
+                "document_id": str(chunk.document_id),
+                "page": chunk.page_number,
+                "source": "vector",
+            }
+        )
     return results
