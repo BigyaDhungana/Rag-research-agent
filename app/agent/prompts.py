@@ -5,8 +5,12 @@ Available tools, each step must use exactly one:
 - "search_documents": search the user's own uploaded documents
 - "fetch_page": fetch and read the full content of a SPECIFIC url (only use this if a step's own reasoning names an exact url — never invent one)
 
+A preliminary check of the user's uploaded documents for this objective found:
+{document_signal}
+
 Rules:
-- Use "search_documents" for anything that could plausibly be in the user's own uploaded files.
+- If the preliminary check found relevant-looking content, you MUST include a "search_documents" step — don't skip it just because the objective also looks like something you could search the web for.
+- If the preliminary check found nothing relevant, do not force a "search_documents" step just to include one.
 - Use "search_web" for anything requiring outside/current information not likely to be in the user's documents.
 - Only use "fetch_page" when you have an actual concrete URL — never guess a url just to justify using this tool.
 - Produce the SMALLEST number of steps that fully covers the objective. Do not pad with redundant steps.
@@ -25,5 +29,7 @@ Objective: {objective}
 JSON:"""
 
 
-def build_planner_prompt(objective: str) -> str:
-    return PLANNER_PROMPT_TEMPLATE.format(objective=objective)
+def build_planner_prompt(objective: str, document_signal: str) -> str:
+    return PLANNER_PROMPT_TEMPLATE.format(
+        objective=objective, document_signal=document_signal
+    )

@@ -11,9 +11,9 @@ router = APIRouter(prefix="/agent", tags=["agent"])
 
 
 @router.post("/plan", response_model=Plan)
-def plan(objective: str):
+def plan(objective: str, db: Session = Depends(get_db)):
     try:
-        return create_plan(objective)
+        return create_plan(db, objective)
     except PlannerError as e:
         raise HTTPException(status_code=502, detail=str(e))
 
