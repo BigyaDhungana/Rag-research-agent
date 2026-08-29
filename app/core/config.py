@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     postgres_port: int = 5432
     gemini_model: str = "gemini-3.6-flash"
     gemini_api_key: str
+    tavily_api_key: str
 
     @property
     def database_url(self) -> str:
