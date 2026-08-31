@@ -1,6 +1,12 @@
+import time
+
 from abc import ABC, abstractmethod
 
 from app.core.config import settings
+
+
+class LLMProviderError(Exception):
+    """Raised when the underlying LLM call fails after all retries."""
 
 
 class LLMProvider(ABC):
@@ -11,18 +17,46 @@ class LLMProvider(ABC):
 
 
 class GeminiLLMProvider(LLMProvider):
+    """
+    Free-tier Google Gemini via the google-genai SDK. Retries on transient
+    server-side errors (503 UNAVAILABLE under high demand, 429 rate limit)
+    with exponential backoff as the free tier is prone to both
+    """
+
+    _RETRYABLE_STATUS_CODES = {503, 429}
+
     def __init__(self):
         from google import genai
 
         self._client = genai.Client(api_key=settings.gemini_api_key)
         self._model = settings.gemini_model
 
-    def generate(self, prompt: str) -> str:
-        response = self._client.models.generate_content(
-            model=self._model,
-            contents=prompt,
+    def generate(
+        self, prompt: str, max_retries: int = 3, base_delay: float = 2.0
+    ) -> str:
+        from google.genai import errors as genai_errors
+
+        last_error: Exception | None = None
+        for attempt in range(max_retries + 1):
+            try:
+                response = self._client.models.generate_content(
+                    model=self._model,
+                    contents=prompt,
+                )
+                return response.text
+            except genai_errors.ServerError as e:
+                last_error = e
+                status_code = getattr(e, "status_code", None)
+                if (
+                    status_code not in self._RETRYABLE_STATUS_CODES
+                    or attempt == max_retries
+                ):
+                    raise LLMProviderError(f"Gemini call failed: {e}") from e
+                time.sleep(base_delay * (2**attempt))
+
+        raise LLMProviderError(
+            f"Gemini call failed after {max_retries + 1} attempts: {last_error}"
         )
-        return response.text
 
 
 _provider: LLMProvider | None = None

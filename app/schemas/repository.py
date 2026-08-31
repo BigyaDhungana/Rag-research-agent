@@ -1,8 +1,10 @@
 import uuid
 from pydantic import BaseModel
 
+
 class RepositoryCreateRequest(BaseModel):
     url: str
+
 
 class RepositoryResponse(BaseModel):
     id: uuid.UUID
@@ -13,3 +15,22 @@ class RepositoryResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class CodeSearchRequest(BaseModel):
+    query: str
+    top_k: int = 5
+
+
+class CodeSearchResponse(BaseModel):
+    results: list[dict]  
+
+
+class CodeAskRequest(BaseModel):
+    question: str
+
+
+class CodeAskResponse(BaseModel):
+    question: str
+    answer: str
+    citations: list[dict]

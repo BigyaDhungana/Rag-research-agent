@@ -7,6 +7,7 @@ from app.services.repo_ingestion.clone import (
     CloneError,
 )
 from app.services.repo_ingestion.discovery import discover_files
+from app.services.code_processor import process_repository_files
 
 
 def ingest_repository(db: Session, url: str) -> Repository:
@@ -36,13 +37,27 @@ def ingest_repository(db: Session, url: str) -> Repository:
                     size_bytes=f["size_bytes"],
                 )
             )
-
-        repo.status = RepositoryStatus.ready
         db.commit()
+        db.refresh(repo)  # ensures repo.files has real ids before chunking
 
     except CloneError as e:
         repo.status = RepositoryStatus.failed
         repo.error_message = str(e)
+        db.commit()
+        db.refresh(repo)
+        return repo
+
+    try:
+        process_repository_files(db, repo.local_path, repo.files)
+        repo.status = RepositoryStatus.ready
+        db.commit()
+
+    except Exception as e:
+        # Chunking/embedding failure (bad file, tree-sitter crash,
+        # embedding call error), so the repo doesn't get stuck at "processing" forever with no reason why.
+        db.rollback()
+        repo.status = RepositoryStatus.failed
+        repo.error_message = f"Chunking/embedding failed: {e}"
         db.commit()
 
     db.refresh(repo)
