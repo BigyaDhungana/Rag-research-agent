@@ -16,3 +16,4 @@ google-genai==2.20.0
 tavily-python
 trafilatura
 langgraph
+tree-sitter-language-pack
