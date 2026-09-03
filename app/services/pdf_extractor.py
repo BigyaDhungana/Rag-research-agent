@@ -1,15 +1,24 @@
-from pypdf import PdfReader
+import fitz
 
 
 def extract_text_by_page(file_path: str) -> list[dict]:
-    reader = PdfReader(file_path)
+    """
+    "text" mode extraction (page.get_text()) is used rather than the
+    richer "blocks"/"dict" modes — this preserves the existing contract
+    (plain text per page) so chunking and everything downstream needs
+    no changes.
+    """
+    doc = fitz.open(file_path)
     pages = []
     has_text = False
-    for i, page in enumerate(reader.pages):
-        text = page.extract_text() or ""
+
+    for i, page in enumerate(doc):
+        text = page.get_text() or ""
         if text.strip():
             has_text = True
         pages.append({"page": i + 1, "text": text})
+
+    doc.close()
 
     if not has_text:
         raise ValueError(
