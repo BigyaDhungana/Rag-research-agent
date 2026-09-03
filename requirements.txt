@@ -18,3 +18,4 @@ trafilatura
 langgraph
 tree-sitter-language-pack
 pymupdf
+langfuse

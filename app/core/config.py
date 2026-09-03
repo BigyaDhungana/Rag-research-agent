@@ -17,6 +17,9 @@ class Settings(BaseSettings):
     gemini_model: str = "gemini-3.6-flash"
     gemini_api_key: str
     tavily_api_key: str
+    langfuse_public_key: str
+    langfuse_secret_key: str
+    langfuse_base_url: str 
 
     @property
     def database_url(self) -> str:

@@ -9,6 +9,8 @@ from app.agent.prompts import build_planner_prompt
 from app.rag.llm import get_llm_provider
 from app.schemas.agent import Plan
 
+from langfuse import observe
+
 
 class PlannerError(Exception):
     """Raised when the LLM's plan can't be parsed/validated after retries."""
@@ -20,7 +22,7 @@ def _extract_json(raw: str) -> str:
         return fence_match.group(1)
     return stripped
 
-
+@observe(name="create_plan")
 def create_plan(db: Session, objective: str, max_retries: int = 1) -> Plan:
     """
     Calls the LLM to produce a structured plan, validates it against the
