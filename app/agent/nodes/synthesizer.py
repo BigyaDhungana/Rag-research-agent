@@ -1,6 +1,8 @@
 from app.agent.state import AgentState
 from app.rag.llm import get_llm_provider
 
+from langfuse import observe
+
 SYNTHESIS_PROMPT_TEMPLATE = """You are a research synthesizer. Combine the numbered sources below into a clear, well-organized answer to the objective. Sources are tagged as either [WEB] or [DOCUMENT].
 
 Rules:
@@ -58,7 +60,7 @@ def _flatten_evidence(tool_results: list[dict]) -> tuple[str, list[dict]]:
 
     return "\n".join(sources_text), citations
 
-
+@observe(name="synthesize")
 def synthesizer_node(state: AgentState) -> AgentState:
     sources_text, citations = _flatten_evidence(state["tool_results"])
 

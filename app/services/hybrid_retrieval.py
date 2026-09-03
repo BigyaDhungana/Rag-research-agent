@@ -6,6 +6,8 @@ from app.rag.reranker import get_reranker
 from app.services.document_search import search_documents
 from app.services.keyword_search import keyword_search
 
+from langfuse import observe
+
 
 def hybrid_search(db: Session, query: str, top_k_per_method: int = 100) -> dict:
     """
@@ -49,7 +51,7 @@ def hybrid_search(db: Session, query: str, top_k_per_method: int = 100) -> dict:
         "candidates": list(candidates.values()),
     }
 
-
+@observe(name="retrieve")
 def retrieve(
     db: Session,
     query: str,

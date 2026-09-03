@@ -4,6 +4,8 @@ from app.rag.llm import get_llm_provider, LLMProviderError
 from app.rag.code_prompts import build_code_qa_prompt
 from app.services.code_retrieval import retrieve_code
 
+from langfuse import observe
+
 INSUFFICIENT_EVIDENCE_MARKER = (
     "I don't have enough information in this codebase to answer that."
 )
@@ -34,7 +36,7 @@ def _build_code_context(results: list[dict]) -> tuple[str, list[dict]]:
         )
     return "\n".join(parts), citations
 
-
+@observe(name="code_qa")
 def ask_repository(db: Session, repository_id: str, question: str) -> dict:
     retrieval = retrieve_code(db, repository_id, question)
     results = retrieval["results"]
