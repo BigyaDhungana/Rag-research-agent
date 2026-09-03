@@ -1,0 +1,299 @@
+[
+  {
+    "question": "Which software techniques are suggested to help prevent programmers from introducing faulty code during development?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 4,
+    "must_contain": [
+      "Programming Techniques adopted",
+      "Peer Review",
+      "Code Analysis"
+    ]
+  },
+  {
+    "question": "What basic characteristics define the requirements for a fault-tolerant system?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 8,
+    "must_contain": [
+      "No single point of failure",
+      "No single point of repair",
+      "reversion modes"
+    ]
+  },
+  {
+    "question": "How does the N-version software concept aim to avoid common mode failures?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 33,
+    "must_contain": [
+      "N-version software",
+      "common mode failures",
+      "design diversity"
+    ]
+  },
+  {
+    "question": "Which safety-critical systems are mentioned as using self-checking software in production?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 35,
+    "must_contain": ["Lucent ESS-5", "Airbus A-340"]
+  },
+  {
+    "question": "What are the primary differences in focus between dependability and survivability?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 38,
+    "must_contain": [
+      "random faults",
+      "coordinated attacks",
+      "intelligent adversaries"
+    ]
+  },
+  {
+    "question": "How is diversity incorporated into the hardware and software design of the Airbus Flight Control System?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 72,
+    "must_contain": [
+      "5 separate computers",
+      "chipsets from different manufacturers",
+      "different programming languages"
+    ]
+  },
+  {
+    "question": "What happens in triple-modular redundancy hardware systems when one component output differs from the others?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 74,
+    "must_contain": [
+      "triple-modular redundancy",
+      "replicated identical components",
+      "ignored"
+    ]
+  },
+  {
+    "question": "Why are floating-point numbers considered an error-prone construct in dependable programming?",
+    "source_document": "fault_tolerance.pdf",
+    "source_page": 91,
+    "must_contain": [
+      "Floating-point numbers",
+      "Inherently imprecise",
+      "invalid comparisons"
+    ]
+  },
+  {
+    "question": "What highway sector was analyzed to collect accident data for bridge sites in Nepal?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 1,
+    "must_contain": ["Naubise - Mugling", "Prithvi Highway"]
+  },
+  {
+    "question": "What straight approach length is recommended for bridge alignment to maintain safety?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 2,
+    "must_contain": ["straight alignment", "50 metres", "safe sight distance"]
+  },
+  {
+    "question": "What bridge carriageway width range should generally be avoided to prevent driver confusion?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 2,
+    "must_contain": ["3.75 metres", "7.5 metres", "confuse the roadusers"]
+  },
+  {
+    "question": "What are the recommended dimensions for a cantilevered pedestrian footway on a bridge?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 3,
+    "must_contain": [
+      "cantilevered off the structure",
+      "1.5 metres",
+      "1.0 metres"
+    ]
+  },
+  {
+    "question": "How does a P2 vehicle-pedestrian parapet differ in application and speed limits?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 5,
+    "must_contain": [
+      "P2'Vehicle - Pedestrian' parapet",
+      "48 Km/h",
+      "horizontal rails"
+    ]
+  },
+  {
+    "question": "What potential safety issue is noted regarding the pipe railing gap in the standard Department of Roads barrier kerb design?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 8,
+    "must_contain": ["Drawing No DSS 019", "500 mm", "300 mm"]
+  },
+  {
+    "question": "Where should continuous edge lines be applied near a bridge approach to prevent parking?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 9,
+    "must_contain": ["Continuous edge lines", "30 metres", "prevent parking"]
+  },
+  {
+    "question": "What is the maximum projected AADT limit for building a single-lane bridge according to feeder road standards?",
+    "source_document": "Safety at Bridge.pdf",
+    "source_page": 10,
+    "must_contain": ["AADT projected", "15 years", "greater than 50"]
+  },
+  {
+    "question": "How long should you charge the Fitbit Versa 4 watch to get 24 hours of battery life?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 8,
+    "must_contain": ["12 minutes", "24 hours", "1-2 hours"]
+  },
+  {
+    "question": "Where should the Fitbit Versa 4 be placed on the wrist during regular daily wear versus during exercise?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 12,
+    "must_contain": [
+      "finger's width above",
+      "wrist bone",
+      "higher on your wrist"
+    ]
+  },
+  {
+    "question": "Which previous Fitbit model bands are compatible with the Fitbit Versa 4?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 15,
+    "must_contain": ["Fitbit Sense", "Fitbit Sense 2", "Fitbit Versa 3"]
+  },
+  {
+    "question": "What automatic feature adjustments occur when the Versa 4 battery level drops to 8% or lower?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 23,
+    "must_contain": [
+      "critically low",
+      "GPS tracking turns off",
+      "vibration strength is set to light"
+    ]
+  },
+  {
+    "question": "How many clock faces can be saved simultaneously to the Fitbit Versa 4 gallery?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 27,
+    "must_contain": ["Save up to 5 clock faces", "My Clock Faces"]
+  },
+  {
+    "question": "How long is the snooze duration when an alarm is snoozed on the Versa 4?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 40,
+    "must_contain": ["snooze icon", "9 minutes", "1 minute"]
+  },
+  {
+    "question": "How many Active Zone Minutes are earned for each minute spent in the cardio or peak heart-rate zones?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 54,
+    "must_contain": [
+      "fat burn zone",
+      "2 Active Zone Minutes",
+      "cardio or peak zones"
+    ]
+  },
+  {
+    "question": "How do you perform a hard restart on the Fitbit Versa 4 from the watch itself?",
+    "source_document": "Fitbit_Versa_4_User_Manual.pdf",
+    "source_page": 61,
+    "must_contain": ["press and hold the button", "10 seconds", "Fitbit logo"]
+  },
+  {
+    "question": "What threshold amount requires a cash transaction report to be submitted to the Financial Information Unit?",
+    "source_document": "AML_CFT_CPF_FAQ_Document",
+    "source_page": 5,
+    "must_contain": ["Threshold Transaction Report", "Rs. 10,00,000"]
+  },
+  {
+    "question": "Within how many days must a Suspicious Transaction Report (STR) be filed after a suspicious activity is identified?",
+    "source_document": "AML_CFT_CPF_FAQ_Document",
+    "source_page": 15,
+    "must_contain": ["3 working days", "Financial Information Unit"]
+  },
+  {
+    "question": "What constitutes Countering Proliferation Financing (CPF) under the regulatory framework?",
+    "source_document": "AML_CFT_CPF_FAQ_Document",
+    "source_page": 18,
+    "must_contain": [
+      "weapons of mass destruction",
+      "targeted financial sanctions"
+    ]
+  },
+  {
+    "question": "What is the primary objective of beneficial ownership identification in legal entities?",
+    "source_document": "AML_CFT_CPF_FAQ_Document",
+    "source_page": 38,
+    "must_contain": ["controlling ownership interest", "25 percent threshold"]
+  },
+  {
+    "question": "How are trade-based money laundering red flags defined in customer transactions?",
+    "source_document": "AML_CFT_CPF_FAQ_Document",
+    "source_page": 49,
+    "must_contain": ["over-invoicing", "under-invoicing"]
+  },
+  {
+    "question": "What specific BLEU score was achieved by the Transformer (big) model on the WMT 2014 English-to-French translation task?",
+    "source_document": "NIPS-2017-attention-is-all-you-need-Paper.pdf",
+    "source_page": 8,
+    "must_contain": ["BLEU score of 41.0", "English-to-French"]
+  },
+  {
+    "question": "What equation defines the Position-wise Feed-Forward Networks used in the Transformer architecture?",
+    "source_document": "NIPS-2017-attention-is-all-you-need-Paper.pdf",
+    "source_page": 5,
+    "must_contain": ["FFN(x)", "max(0, xW_1 + b_1)W_2 + b_2"]
+  },
+  {
+    "question": "What formula is used to calculate Scaled Dot-Product Attention?",
+    "source_document": "NIPS-2017-attention-is-all-you-need-Paper.pdf",
+    "source_page": 4,
+    "must_contain": [
+      "Attention(Q, K, V)",
+      "softmax(\\frac{QK^T}{\\sqrt{d_k}})V"
+    ]
+  },
+  {
+    "question": "How does the graph or bath-tub curve describe the changing nature of software compared to hardware wear-out?",
+    "source_document": "SEbook.pdf",
+    "source_page": 2,
+    "must_contain": ["bath-tub curve", "wear-out state"]
+  },
+  {
+    "question": "What role does the 'Quality Focus' layer play in software engineering as a layered technology?",
+    "source_document": "SEbook.pdf",
+    "source_page": 4,
+    "must_contain": ["BedRock", "organizational commitment"]
+  },
+  {
+    "question": "Which software life cycle model is specifically referred to as a 'risk driven model'?",
+    "source_document": "SEbook.pdf",
+    "source_page": 9,
+    "must_contain": ["Spiral model", "risk driven model"]
+  },
+  {
+    "question": "How does the Broker architectural pattern coordinate distributed software communication?",
+    "source_document": "SEbook.pdf",
+    "source_page": 22,
+    "must_contain": ["remote service invocations", "CORBA"]
+  },
+  {
+    "question": "What components make up the Model-View-Controller (MVC) architectural pattern?",
+    "source_document": "SEbook.pdf",
+    "source_page": 22,
+    "must_contain": ["underlying classes", "render the appearance"]
+  },
+  {
+    "question": "How does the Pipe-and-Filter architectural pattern process incoming data streams?",
+    "source_document": "SEbook.pdf",
+    "source_page": 23,
+    "must_contain": [
+      "transformational architectural pattern",
+      "chain of processing elements"
+    ]
+  },
+  {
+    "question": "What software testing design techniques are categorized under Black-Box testing?",
+    "source_document": "SEbook.pdf",
+    "source_page": 26,
+    "must_contain": ["Equivalence Class", "Orthogonal Arrays"]
+  },
+  {
+    "question": "What common strategies are utilized during software debugging to isolate code errors?",
+    "source_document": "SEbook.pdf",
+    "source_page": 27,
+    "must_contain": ["Brute force", "Cause elimination"]
+  }
+]

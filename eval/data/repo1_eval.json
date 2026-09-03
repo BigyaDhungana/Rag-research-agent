@@ -1,0 +1,66 @@
+[
+  {
+    "question": "How does the app request storage and photo library permissions across Android and iOS platforms?",
+    "source_file": "lib/src/common/utils/download_image.dart",
+    "expected_symbol": "checkAndRequestPermissions",
+    "must_contain": ["Permission.photosAddOnly", "Permission.storage.request()"]
+  },
+  {
+    "question": "How does the app download an image byte array and save it to the user's device gallery?",
+    "source_file": "lib/src/common/utils/download_image.dart",
+    "expected_symbol": "downloadAndSaveImage",
+    "must_contain": [
+      "SaverGallery.saveImage",
+      "Pictures/appName/images",
+      "Saved to gallery"
+    ]
+  },
+  {
+    "question": "How is a photo saved locally to local storage when added to favorites for offline access?",
+    "source_file": "lib/src/data/hive/favorites.dart",
+    "expected_symbol": "ManageFavourite.addFavourite",
+    "must_contain": ["Hive.box('favourites')", "photo.ddlLink!"]
+  },
+  {
+    "question": "How does the system delete a photo's locally saved file when removing it from the favorites list?",
+    "source_file": "lib/src/data/hive/favorites.dart",
+    "expected_symbol": "ManageFavourite.removeFavourite",
+    "must_contain": ["indexWhere", "file.delete()"]
+  },
+  {
+    "question": "How are all local favorite photos retrieved and mapped from Hive storage into model objects?",
+    "source_file": "lib/src/data/hive/favorites.dart",
+    "expected_symbol": "ManageFavourite.getAllFavourites",
+    "must_contain": ["FavoritesModal.fromMap", "defaultValue: []"]
+  },
+  {
+    "question": "How is the search state updated and reset when a user enters a new search term?",
+    "source_file": "lib/src/providers/search_query_provider.dart",
+    "expected_symbol": "SearchProvider.updateQuery",
+    "must_contain": ["_query = value", "_results.clear()"]
+  },
+  {
+    "question": "How does the SearchProvider fetch search results from the API with pagination support?",
+    "source_file": "lib/src/providers/search_query_provider.dart",
+    "expected_symbol": "SearchProvider.fetchResults",
+    "must_contain": ["Api().searchImages", "loadMore"]
+  },
+  {
+    "question": "How does the network client fetch a paginated list of feed images and handle connection timeouts?",
+    "source_file": "lib/src/data/network/api.dart",
+    "expected_symbol": "Api.getImages",
+    "must_contain": ["DioExceptionType.connectionTimeout", "No images found."]
+  },
+  {
+    "question": "How does the API client download an image file to the application documents directory while triggering the Unsplash registration link?",
+    "source_file": "lib/src/data/network/api.dart",
+    "expected_symbol": "Api.downloadImage",
+    "must_contain": ["getApplicationDocumentsDirectory", "noBaseUrl"]
+  },
+  {
+    "question": "How does the API client retrieve raw image bytes directly using Dio with a custom response type?",
+    "source_file": "lib/src/data/network/api.dart",
+    "expected_symbol": "Api.getImageBytes",
+    "must_contain": ["ResponseType.bytes", "downloadGetUrl"]
+  }
+]

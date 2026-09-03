@@ -1,0 +1,85 @@
+[
+  {
+    "question": "How does the background celery task clean up inactive users and record the action in the database?",
+    "source_file": "django-backend/cleanup/tasks.py",
+    "expected_symbol": "cleanup_inactive_users",
+    "must_contain": [
+      "INACTIVITY_THRESHOLD_MINUTES",
+      "transaction.atomic()",
+      "CleanupReport.objects.create"
+    ]
+  },
+  {
+    "question": "What string representation is generated for individual CleanupReport model instances?",
+    "source_file": "django-backend/cleanup/models.py",
+    "expected_symbol": "CleanupReport.__str__",
+    "must_contain": ["f'{self.timestamp} deleted {self.users_deleted}'"]
+  },
+  {
+    "question": "What parameters and fields define the User model schema in the database?",
+    "source_file": "django-backend/cleanup/models.py",
+    "expected_symbol": "User",
+    "must_contain": ["validate_email", "last_login", "is_active"]
+  },
+  {
+    "question": "What fields compose the CleanupReport data model used to track deletion history?",
+    "source_file": "django-backend/cleanup/models.py",
+    "expected_symbol": "CleanupReport",
+    "must_contain": ["users_deleted", "active_users_remaining", "was_manual"]
+  },
+  {
+    "question": "How is the string representation formatted for the custom User model?",
+    "source_file": "django-backend/cleanup/models.py",
+    "expected_symbol": "User.__str__",
+    "must_contain": ["return self.email"]
+  },
+  {
+    "question": "How are initial active and inactive test users created before executing cleanup tests?",
+    "source_file": "django-backend/cleanup/celery_test.py",
+    "expected_symbol": "CleanupTaskTest.setUp",
+    "must_contain": [
+      "active@test.com",
+      "inactive@test.com",
+      "timedelta(minutes=20)"
+    ]
+  },
+  {
+    "question": "How does the test suite verify that inactive users are removed while active users remain untouched?",
+    "source_file": "django-backend/cleanup/celery_test.py",
+    "expected_symbol": "CleanupTaskTest.test_cleanup_inactive_users",
+    "must_contain": [
+      "cleanup_inactive_users(True)",
+      "refresh_from_db()",
+      "assertIsNotNone(report)"
+    ]
+  },
+  {
+    "question": "What test class contains unit test coverage for the celery user deletion task?",
+    "source_file": "django-backend/cleanup/celery_test.py",
+    "expected_symbol": "CleanupTaskTest",
+    "must_contain": [
+      "TestCase",
+      "self.active_user",
+      "test_cleanup_inactive_users"
+    ]
+  },
+  {
+    "question": "How does the user cleanup task handle exceptions and retry attempts when execution fails?",
+    "source_file": "django-backend/cleanup/tasks.py",
+    "expected_symbol": "cleanup_inactive_users",
+    "must_contain": [
+      "self.request.retries >= max_retries",
+      "self.retry(exc=e",
+      "countdown=5"
+    ]
+  },
+  {
+    "question": "How is the inactive user deletion threshold calculated from environment variables?",
+    "source_file": "django-backend/cleanup/tasks.py",
+    "expected_symbol": "cleanup_inactive_users",
+    "must_contain": [
+      "env.float('INACTIVITY_THRESHOLD_MINUTES'",
+      "default=30*24*60"
+    ]
+  }
+]
