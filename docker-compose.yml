@@ -23,6 +23,7 @@ services:
       dockerfile: Dockerfile
     container_name: rag_api
     restart: unless-stopped
+    user: "${UID}:${GID}"
     env_file:
       - .env
     ports:
@@ -32,7 +33,6 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
 volumes:
   pgdata:
